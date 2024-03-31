@@ -101,6 +101,11 @@ public class HelloController implements Initializable {
         outputWriter.writeAll(lines);
 
         outputCsvButton.setText("Successfully written!");
+        try {
+            outputWriter.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 

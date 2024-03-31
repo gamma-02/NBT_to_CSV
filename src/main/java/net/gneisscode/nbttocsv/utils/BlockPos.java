@@ -526,11 +526,11 @@ public class BlockPos extends Vec3i {
         public BlockPos.MutableBlockPos clamp(Direction.Axis pAxis, int pMin, int pMax) {
             switch (pAxis) {
                 case X:
-                    return this.set(Math.clamp(this.getX(), pMin, pMax), this.getY(), this.getZ());
+                    return this.set(Util.clamp(this.getX(), pMin, pMax), this.getY(), this.getZ());
                 case Y:
-                    return this.set(this.getX(), Math.clamp(this.getY(), pMin, pMax), this.getZ());
+                    return this.set(this.getX(), Util.clamp(this.getY(), pMin, pMax), this.getZ());
                 case Z:
-                    return this.set(this.getX(), this.getY(), Math.clamp(this.getZ(), pMin, pMax));
+                    return this.set(this.getX(), this.getY(), Util.clamp(this.getZ(), pMin, pMax));
                 default:
                     throw new IllegalStateException("Unable to clamp axis " + pAxis);
             }

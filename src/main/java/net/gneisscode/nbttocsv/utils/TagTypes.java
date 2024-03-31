@@ -278,7 +278,7 @@ public class TagTypes {
                     }
                     ListTag<Tag<?>> listTag;
                     if(!list.isEmpty()) {
-                        listTag = new ListTag<>((Class<? super Tag<?>>) list.getFirst().getClass());//lord save us all.
+                        listTag = new ListTag<>((Class<? super Tag<?>>) list.get(0).getClass());//lord save us all.
 
                         listTag.addAll(list);
                         return  listTag;
