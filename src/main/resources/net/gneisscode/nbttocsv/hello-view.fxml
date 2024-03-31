@@ -8,17 +8,46 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import org.controlsfx.control.ToggleSwitch?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="net.gneisscode.nbttocsv.HelloController" >
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import org.kordamp.bootstrapfx.scene.layout.Panel?>
+<?import javafx.scene.text.Text?>
+<TabPane xmlns:fx="http://javafx.com/fxml" fx:controller="net.gneisscode.nbttocsv.HelloController" tabClosingPolicy="UNAVAILABLE" styleClass="panel-primary" fx:id="fullPanel">
+    <Tab text="Input NBT file" styleClass="btn, btn-default">
+        <VBox alignment="CENTER" spacing="20.0">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Process input file" onAction="#onHelloButtonClick"/>
-    <TextField fx:id="inputArea" text="Please write input file here!"/>
-    <Label fx:id="outputCsvButton"/>
-    <Button text="Write output CSV" onAction="#onOutputClick"/>
-    <ToggleSwitch fx:id="writeAir"/>
-    <TextField fx:id="csvPathInput" text="CSV output file path"/>
-</VBox>
+            <Label text="Load your structure file" styleClass="lbl, lbl-primary" style="-fx-font-size: 15;"/>
+            <Label fx:id="welcomeText" styleClass="b" style="-fx-font-size: 15;"/>
+            <TextField fx:id="inputArea" promptText="Please paste input file path here!"/>
+
+            <Button text="Process input file" onAction="#onHelloButtonClick" styleClass="btn, btn-default" fx:id="inputButton"/>
+        </VBox>
+    </Tab>
+    <Tab text="Output CSV" styleClass="btn, btn-default">
+        <VBox alignment="CENTER" spacing="20.0" >
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+
+            <Label fx:id="outputCsvTitle" styleClass="lbl, lbl-primary" style="-fx-font-size: 15;" text="Output a CSV Here"/>
+            <Label fx:id="outputCsvInfo" styleClass="b" style="-fx-font-size: 15;"/>
+            <TextField fx:id="csvPathInput" promptText="CSV output file path" />
+            <ToggleSwitch fx:id="writeAir" text="Write air states to CSV"/>
+            <Button text="Write output CSV" onAction="#onOutputClick" styleClass="btn, btn-default"/>
+        </VBox>
+
+    </Tab>
+    <Tab text="Output Function" styleClass="btn, btn-default" onSelectionChanged="#onFunctionTabSelected">
+        <VBox alignment="CENTER" spacing="20.0" >
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+
+            <Label styleClass="h1, lbl, lbl-warning" style="-fx-font-size: 40;" text="WIP"/>
+        </VBox>
+    </Tab>
+
+</TabPane>

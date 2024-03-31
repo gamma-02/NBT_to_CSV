@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import net.gneisscode.nbttocsv.utils.Util;
 import net.querz.nbt.tag.*;
+import org.kordamp.bootstrapfx.BootstrapFX;
 
 public class HelloApplication extends Application {
 
@@ -22,10 +23,16 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 350);
-        stage.setTitle("NBT to CSV");
+        Scene scene = new Scene(fxmlLoader.load(), 450, 350);
+
+
+        scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+
+
+
         stage.setScene(scene);
 
+        stage.setTitle("NBT to CSV");
         stage.show();
     }
 

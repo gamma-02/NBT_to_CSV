@@ -175,7 +175,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>net.gneisscode.nbttocsv.JFXHack</mainClass>
+                            <mainClass>net.gneisscode.nbttocsv.JavaFXThings.JFXHack</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
@@ -195,7 +195,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>net.gneisscode.nbttocsv.JFXHack</mainClass>
+                            <mainClass>net.gneisscode.nbttocsv.JavaFXThings.JFXHack</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -205,13 +205,13 @@
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.5.2</version>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>net.gneisscode.nbttocsv.JFXHack</mainClass>
-                        </manifest>
-                    </archive>
+<!--                    <archive>-->
+<!--                        <manifest>-->
+<!--                            <addClasspath>true</addClasspath>-->
+<!--                            <classpathPrefix>lib/</classpathPrefix>-->
+<!--                            <mainClass>net.gneisscode.nbttocsv.JavaFXThings.JFXHack</mainClass>-->
+<!--                        </manifest>-->
+<!--                    </archive>-->
                 </configuration>
                 <executions>
                     <execution>

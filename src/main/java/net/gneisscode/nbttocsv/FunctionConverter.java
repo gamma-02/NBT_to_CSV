@@ -67,7 +67,7 @@ public class FunctionConverter {
      * @return The formatted function file
      */
     public static String getStructureBuildStartFunction(String functionName){
-        URL defaultFunction = FunctionConverter.class.getResource("/net/gneisscode/nbttocsv/buid_start.txt");
+        URL defaultFunction = FunctionConverter.class.getResource("buid_start.txt");
         if (defaultFunction == null) {
             return "ERROR";
         }

@@ -2,20 +2,21 @@ package net.gneisscode.nbttocsv;
 
 import com.opencsv.CSVWriter;
 import com.opencsv.CSVWriterBuilder;
-import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import net.querz.nbt.tag.CompoundTag;
 import org.controlsfx.control.ToggleSwitch;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,11 +26,17 @@ import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
     @FXML
-    public Label outputCsvButton;
+    public Label outputCsvInfo;
     @FXML
     public ToggleSwitch writeAir;
     @FXML
     public TextField csvPathInput;
+    @FXML
+    public Button inputButton;
+    @FXML
+    public Label outputCsvTitle;
+    @FXML
+    public TabPane fullPanel;
     @FXML
     private Label welcomeText;
 
@@ -62,10 +69,12 @@ public class HelloController implements Initializable {
         if(HelloApplication.BLOCKS.isEmpty())
             return;
 
+        ArrayList<BlockContainer> blocks = new ArrayList<>();
+
         for(BlockContainer block : HelloApplication.BLOCKS){
             block.resolve();
-            if(!writeAir.isSelected())
-                HelloApplication.BLOCKS.remove(block);
+            if(!writeAir.isSelected() && !block.location.equals("minecraft:air"))
+                blocks.add(block);
         }
 
         FileWriter outputFile = null;
@@ -73,7 +82,7 @@ public class HelloController implements Initializable {
 
             outputFile = new FileWriter(FileSystems.getDefault().getPath(csvPathInput.getText()).toFile());
         } catch (IOException e) {
-            outputCsvButton.setText("Path invalid!");
+            outputCsvInfo.setText("Path invalid!");
             throw new RuntimeException(e);
         }
 
@@ -83,7 +92,7 @@ public class HelloController implements Initializable {
         int longestRow = 0;
 
         ArrayList<String[]> lines = new ArrayList<>();
-        for(BlockContainer b : HelloApplication.BLOCKS){
+        for(BlockContainer b : blocks){
 
             ArrayList<String> row = b.getCsvRow();
 
@@ -100,7 +109,7 @@ public class HelloController implements Initializable {
         outputWriter.writeNext(header.toArray(new String[0]));
         outputWriter.writeAll(lines);
 
-        outputCsvButton.setText("Successfully written!");
+        outputCsvInfo.setText("Successfully written!");
         try {
             outputWriter.close();
         } catch (IOException e) {
@@ -109,11 +118,32 @@ public class HelloController implements Initializable {
 
     }
 
+    private ChangeListener<Boolean> listener;
+
     @FXML
     private TextField inputArea;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        outputCsvButton.setText("Output controls");
+        fullPanel.setStyle("-fx-focus-color: transparent; -fx-faint-focus-color: transparent;");
+
+//        inputButton.getStyleClass().setAll("btn","btn-danger");
+        inputArea.setPrefHeight(30);
+        csvPathInput.setPrefHeight(30);
+
+        listener = new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                writeAir.setText("Write air states to CSV: " + (newValue ? "Yes" : "No"));
+
+            }
+
+        };
+        writeAir.selectedProperty().addListener(listener);
+    }
+
+    public void onFunctionTabSelected(Event event) {
+
+
     }
 }
