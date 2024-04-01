@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import org.controlsfx.control.ToggleSwitch?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import org.kordamp.bootstrapfx.scene.layout.Panel?>
-<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.Group?>
 <TabPane xmlns:fx="http://javafx.com/fxml" fx:controller="net.gneisscode.nbttocsv.HelloController" tabClosingPolicy="UNAVAILABLE" styleClass="panel-primary" fx:id="fullPanel">
     <Tab text="Input NBT file" styleClass="btn, btn-default">
         <VBox alignment="CENTER" spacing="20.0">
@@ -46,7 +41,35 @@
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
             </padding>
 
-            <Label styleClass="h1, lbl, lbl-warning" style="-fx-font-size: 40;" text="WIP"/>
+            <Group visible="true">
+                <Label styleClass="h1, lbl, lbl-warning" style="-fx-font-size: 40;" text="WIP" fx:id="WIP"/>
+            </Group>
+
+            <Group visible="false">
+
+                <Label fx:id="outputFunctionTitle" styleClass="lbl, lbl-primary" style="-fx-font-size: 15;" text="Output Minecraft Function"/>
+                <Label fx:id="outputFunctionInfo" styleClass="b" style="-fx-font-size: 15;"/>
+                <TextField fx:id="functionNameInput" promptText="Name of the function in Minecraft"/>
+
+
+                <HBox alignment="CENTER">
+                    <!-- TODO: BUILD ACTUAL FUNCTION -->
+                    <TextField fx:id="lengthOfExecution" promptText="Length of Animation"/>
+                    <!-- TODO: ADD THESE -->
+                    <TextField fx:id="buildDirection" promptText="Build direction/instructions"/>
+                </HBox>
+
+                <!--We could add a bunch more options for output here with an HBox!-->
+
+                <ToggleSwitch fx:id="writeFunctionToZip" text="Write function to zipped datapack"/>
+                <TextField fx:id="functionOutputLocation" promptText="Function output path"/>
+
+
+                <Button fx:id="outputFunctionButton" text="Output function" onAction="#outputFunction"/>
+            </Group>
+
+
+            <!--            -->
         </VBox>
     </Tab>
 

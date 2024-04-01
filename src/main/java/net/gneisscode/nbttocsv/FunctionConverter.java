@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -67,7 +68,7 @@ public class FunctionConverter {
      * @return The formatted function file
      */
     public static String getStructureBuildStartFunction(String functionName){
-        URL defaultFunction = FunctionConverter.class.getResource("buid_start.txt");
+        URL defaultFunction = FunctionConverter.class.getResource("build_start.txt");
         if (defaultFunction == null) {
             return "ERROR";
         }
@@ -91,6 +92,36 @@ public class FunctionConverter {
         }
         return new String(finalBuilder);
 
+    }
+
+
+    public static List<String> getStructureEndFunctionFragment(String functionName, int executionLength){
+
+        URL defaultFunction = FunctionConverter.class.getResource("build_end.txt");
+        if (defaultFunction == null) {
+            return List.of("ERROR");
+        }
+        Path defaultFunctionPath;
+        try {
+
+            defaultFunctionPath = Path.of(defaultFunction.toURI());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+
+        List<String> function;
+        try {
+            function = Files.readAllLines(defaultFunctionPath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        ArrayList<String> finalBuilder = new ArrayList<>();
+        for (int i = 0; i < function.size(); i++) {
+            finalBuilder.add(function.get(i).formatted(functionName, executionLength, executionLength - 1));
+        }
+
+        return finalBuilder;
     }
 
 

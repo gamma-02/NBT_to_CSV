@@ -1,0 +1,6 @@
+
+
+execute if score Dataman count matches ..%3$d run scoreboard players add Dataman count 1
+execute if score Dataman count matches ..%3$d run schedule function gneiss:$1%s 2
+execute if score Dataman count matches %2$d run kill @e[tag=auto_$1%s]
+execute if score Dataman count matches %2$d run scoreboard objectives remove count

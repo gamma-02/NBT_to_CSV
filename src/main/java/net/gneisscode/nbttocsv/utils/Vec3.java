@@ -1,6 +1,6 @@
 package net.gneisscode.nbttocsv.utils;
 
-import com.almasb.fxgl.core.math.Vec2;
+//import com.almasb.fxgl.core.math.Vec2;
 import com.mojang.serialization.Codec;
 
 import java.util.EnumSet;
@@ -241,12 +241,12 @@ public class Vec3 implements Position{
         return new Vec3(d0, d1, d2);
     }
 
-    /**
-     * returns a Vec3d from given pitch and yaw degrees as Vec2f
-     */
-    public static Vec3 directionFromRotation(Vec2 pVec) {
-        return directionFromRotation(pVec.x, pVec.y);
-    }
+//    /**
+//     * returns a Vec3d from given pitch and yaw degrees as Vec2f
+//     */
+//    public static Vec3 directionFromRotation(Vec2 pVec) {
+//        return directionFromRotation(pVec.x, pVec.y);
+//    }
 
     /**
      * returns a Vec3d from given pitch and yaw degrees

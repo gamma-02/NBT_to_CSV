@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import net.gneisscode.nbttocsv.utils.Util;
 import net.querz.nbt.tag.*;
@@ -17,7 +18,7 @@ public class HelloApplication extends Application {
 
     public static CompoundTag NBTFile = null;
 
-    public static ArrayList<BlockContainer> BLOCKS = new ArrayList<>();
+    public static CopyOnWriteArrayList<BlockContainer> BLOCKS = new CopyOnWriteArrayList<>();
 
 
     @Override

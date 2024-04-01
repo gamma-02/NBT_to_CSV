@@ -1,5 +1,5 @@
 scoreboard objectives add count trigger
 scoreboard players set Dataman count 0
 scoreboard objectives setdisplay sidebar count
-summon armor_stand ~ ~ ~ {Invisible:1b,Tags:["auto_$1%s"]}
-schedule function gneiss:$1%s 2
+summon armor_stand ~ ~ ~ {Invisible:1b,Tags:["auto_%1$s"]}
+schedule function gneiss:%1$s 2
