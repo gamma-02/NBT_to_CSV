@@ -59,7 +59,7 @@
                 </VBox>
             </HBox>
             <Button text="Write state outputs" onAction="#onSetblockOutputClick" styleClass="btn, btn-default"/>
-            <TextArea fx:id="setblockListOutput" styleClass="work-you-dumb-thing, btn, btn-success" style="-fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -20%), derive(-fx-text-box-border, -30%)), derive(lightgray, 70%); -fx-border-radius: 4px;"/>
+            <TextArea fx:id="setblockListOutput" styleClass="work-you-dumb-thing" style="-fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -20%), derive(-fx-text-box-border, -30%)), derive(lightgray, 70%); -fx-border-radius: 4px;"/>
         </VBox>
     </Tab>
     <Tab text="Output Function" styleClass="btn, btn-default" onSelectionChanged="#onFunctionTabSelected">

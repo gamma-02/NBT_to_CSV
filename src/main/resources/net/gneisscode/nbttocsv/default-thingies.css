@@ -10,12 +10,12 @@
 }
 
 .toggle-switch:selected .thumb-area{
-    -fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -20%), derive(-fx-text-box-border, -30%)), #60ff60;
+    -fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -20%), derive(-fx-text-box-border, -30%)), #bbffbb;
 
 }
 
 .toggle-switch .thumb-area{
-    -fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -20%), derive(-fx-text-box-border, -30%)), derive(lightslategray, 70%);
+    -fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -20%), derive(-fx-text-box-border, -30%)), derive(lightgray, 25%);
 }
 
 .panel-primary{
