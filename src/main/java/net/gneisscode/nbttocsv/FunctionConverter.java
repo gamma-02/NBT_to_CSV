@@ -1,6 +1,7 @@
 package net.gneisscode.nbttocsv;
 
 import net.gneisscode.nbttocsv.utils.BlockPos;
+import net.gneisscode.nbttocsv.utils.Vec3i;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -21,7 +22,7 @@ public class FunctionConverter {
      * index 6: block NBT(optional)<br>
      * index 7: optional
      */
-    public static final String PLACE_BLOCK_COMMAND = "setblock $7%s$1%d $7%s$2%d $7%s$3%d $4%s$5%s$6%s";
+    public static final String PLACE_BLOCK_COMMAND = "setblock %7$s%1$d %7$s%2$d %7$s%3$d %4$s%5$s%6$s";
 
 
     /**
@@ -47,6 +48,25 @@ public class FunctionConverter {
         builder.append("]");
 
         return PLACE_BLOCK_COMMAND.formatted(pos.getX(), pos.getY(), pos.getZ(), fromBlock.location, builder.toString(), fromBlock.nbt, (relative ? "~" : ""));
+    }
+
+    /**
+     * This method formats the {@link #PLACE_BLOCK_COMMAND} string into a minecraft readable command
+     * @param fromBlock The block to be converted\
+     * @param relativeToPos the relative(corner) position
+     * @return The formatted string
+     */
+    public static String getPlaceBlockCommand(BlockContainer fromBlock, Vec3i relativeToPos){
+        BlockPos pos = fromBlock.pos;
+
+        HashMap<String, String> props = fromBlock.properties;
+        StringBuilder builder = new StringBuilder("[");
+        props.forEach((name, value) ->{
+            builder.append(name).append("=").append(value);
+        });
+        builder.append("]");
+
+        return PLACE_BLOCK_COMMAND.formatted(pos.getX() + relativeToPos.getX(), pos.getY() + relativeToPos.getY(), pos.getZ() + relativeToPos.getZ(), fromBlock.location, builder.toString(), fromBlock.nbt, "");
     }
 
     /**

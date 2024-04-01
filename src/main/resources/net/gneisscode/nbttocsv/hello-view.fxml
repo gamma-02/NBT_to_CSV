@@ -16,7 +16,7 @@
 
             <Label text="Load your structure file" styleClass="lbl, lbl-primary" style="-fx-font-size: 15;"/>
             <Label fx:id="welcomeText" styleClass="b" style="-fx-font-size: 15;"/>
-            <TextField fx:id="inputArea" promptText="Please paste input file path here!"/>
+            <TextField fx:id="inputArea" promptText="Please paste input file path here!" style="-fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -20%), derive(-fx-text-box-border, -30%)), derive(lightgray, 70%);"/>
 
             <Button text="Process input file" onAction="#onHelloButtonClick" styleClass="btn, btn-default" fx:id="inputButton"/>
         </VBox>
@@ -29,11 +29,38 @@
 
             <Label fx:id="outputCsvTitle" styleClass="lbl, lbl-primary" style="-fx-font-size: 15;" text="Output a CSV Here"/>
             <Label fx:id="outputCsvInfo" styleClass="b" style="-fx-font-size: 15;"/>
-            <TextField fx:id="csvPathInput" promptText="CSV output file path" />
+            <TextField fx:id="csvPathInput" promptText="CSV output file path" style="-fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -20%), derive(-fx-text-box-border, -30%)), derive(lightgray, 70%);"/>
             <ToggleSwitch fx:id="writeAir" text="Write air states to CSV"/>
             <Button text="Write output CSV" onAction="#onOutputClick" styleClass="btn, btn-default"/>
         </VBox>
 
+    </Tab>
+    <Tab text="Output Blockstates" styleClass="btn, btn-default">
+        <VBox alignment="CENTER" spacing="20.0" >
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+
+            <Label fx:id="outputSetblocksTitle" styleClass="lbl, lbl-primary" style="-fx-font-size: 15;" text="Output list of Setblock"/>
+<!--            <Label fx:id="outputSetblockInfo" styleClass="b" style="-fx-font-size: 15;"/>-->
+<!--            <TextField fx:id="csvPathInput" promptText="CSV output file path" />-->
+            <HBox>
+
+                <ToggleSwitch fx:id="writeBlockstateListAir" text="Write air states to setblocks">
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="40.0"/>
+                    </padding>
+                </ToggleSwitch>
+                <VBox>
+                    <Label text="Relative to (~) position"/>
+                    <TextField  fx:id="cornerPosX" promptText="X" style="-fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -20%), derive(-fx-text-box-border, -30%)), derive(lightgray, 70%);"/>
+                    <TextField  fx:id="cornerPosY" promptText="Y" style="-fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -20%), derive(-fx-text-box-border, -30%)), derive(lightgray, 70%);" />
+                    <TextField  fx:id="cornerPosZ" promptText="Z" style="-fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -20%), derive(-fx-text-box-border, -30%)), derive(lightgray, 70%);"/>
+                </VBox>
+            </HBox>
+            <Button text="Write state outputs" onAction="#onSetblockOutputClick" styleClass="btn, btn-default"/>
+            <TextArea fx:id="setblockListOutput" styleClass="work-you-dumb-thing, btn, btn-success" style="-fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -20%), derive(-fx-text-box-border, -30%)), derive(lightgray, 70%); -fx-border-radius: 4px;"/>
+        </VBox>
     </Tab>
     <Tab text="Output Function" styleClass="btn, btn-default" onSelectionChanged="#onFunctionTabSelected">
         <VBox alignment="CENTER" spacing="20.0" >
@@ -72,5 +99,6 @@
             <!--            -->
         </VBox>
     </Tab>
+
 
 </TabPane>

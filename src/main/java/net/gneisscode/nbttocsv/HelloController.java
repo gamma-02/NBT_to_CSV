@@ -8,12 +8,11 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import net.gneisscode.nbttocsv.JavaFXThings.NumericInputField;
+import net.gneisscode.nbttocsv.utils.Vec3i;
 import net.querz.nbt.tag.CompoundTag;
+import org.apache.commons.lang3.StringUtils;
 import org.controlsfx.control.ToggleSwitch;
 
 import java.io.FileWriter;
@@ -31,6 +30,7 @@ public class HelloController implements Initializable {
     public TabPane fullPanel;
 
 
+
     // NBT input tab
 
     @FXML
@@ -44,10 +44,17 @@ public class HelloController implements Initializable {
 //        welcomeText.setText("Welcome to JavaFX Application!");
         String path = inputArea.getText();
 
-        Path filePath = FileSystems.getDefault().getPath(path);
+        Path filePath = FileSystems.getDefault().getPath(path.replace("\"", ""));
 
         if(!Files.exists(filePath))
             welcomeText.setText("File not found!");
+
+        //clear the tag list and the blocks list if they aren't empty
+        if(!HelloApplication.NBTFile.values().isEmpty())
+            HelloApplication.NBTFile.clear();
+
+        if(!HelloApplication.BLOCKS.isEmpty())
+            HelloApplication.BLOCKS.clear();
 
         try {
             CompoundTag NBTFile = HelloApplication.readFile(filePath);
@@ -122,14 +129,58 @@ public class HelloController implements Initializable {
 
         outputCsvInfo.setText("Successfully written!");
 
-        HelloApplication.BLOCKS.clear();//Clear the list of blocks
-        HelloApplication.NBTFile = new CompoundTag();//clear the NBT tag
+//        HelloApplication.BLOCKS.clear();//Clear the list of blocks
+//        HelloApplication.NBTFile = new CompoundTag();//clear the NBT tag
 
         try {
             outputWriter.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+
+    }
+
+    @FXML
+    public Label outputSetblocksTitle;
+
+    @FXML
+    public ToggleSwitch writeBlockstateListAir;
+
+    @FXML
+    public TextArea setblockListOutput;
+
+    @FXML
+    public TextField cornerPos;
+    @FXML
+    public TextField cornerPosX;
+    @FXML
+    public TextField cornerPosY;
+    @FXML
+    public TextField cornerPosZ;
+
+    @FXML
+    protected void onSetblockOutputClick() {
+        if(HelloApplication.BLOCKS.isEmpty())
+            return;
+
+        //resolve blocks and handle air functionality
+        ArrayList<BlockContainer> blocks = new ArrayList<>();
+
+        for(BlockContainer block : HelloApplication.BLOCKS){
+            block.resolve();
+            if(!writeAir.isSelected() && !block.location.equals("minecraft:air"))
+                blocks.add(block);
+        }
+
+        StringBuilder setblocks = new StringBuilder();
+
+        for(BlockContainer block : blocks){
+            setblocks.append(FunctionConverter.getPlaceBlockCommand(block, new Vec3i(cornerPosX.getText().isEmpty() ? 0 : Integer.parseInt(cornerPosX.getText()), cornerPosY.getText().isEmpty() ? 0 : Integer.parseInt(cornerPosY.getText()), cornerPosZ.getText().isEmpty() ? 0 : Integer.parseInt(cornerPosZ.getText())))).append("\n");
+        }
+
+        setblockListOutput.setText(new String(setblocks));
+
 
 
     }
@@ -192,6 +243,20 @@ public class HelloController implements Initializable {
             }
         });
 
+        cornerPosX.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+
+                    cornerPosX.setText(newValue.replaceAll("\\D", ""));
+
+                }
+            }
+        });
+
+        setblockListOutput.setEditable(false);
+
         listener = new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -201,12 +266,14 @@ public class HelloController implements Initializable {
 
         };
         writeAir.selectedProperty().addListener(listener);
+
     }
 
     public void onFunctionTabSelected(Event event) {
 
 
     }
+
 
 
 }

@@ -1,2 +1,32 @@
 
 
+.scroll-bar .thumb{
+    -fx-border-radius: 0, 0, 0, 0;
+    -fx-background-radius: 0em;
+}
+
+.thumb{
+    -fx-background-color: derive(black, 90%);
+}
+
+.toggle-switch:selected .thumb-area{
+    -fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -20%), derive(-fx-text-box-border, -30%)), #60ff60;
+
+}
+
+.toggle-switch .thumb-area{
+    -fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -20%), derive(-fx-text-box-border, -30%)), derive(lightslategray, 70%);
+}
+
+.panel-primary{
+    -fx-background-color: derive(lightslategray, 70%);
+}
+
+.work-you-dumb-thing{
+      -fx-fill: derive(lightgray, 70%);
+      -fx-background-color: #204d74;
+      -fx-border-color: #122b40;
+}
+
+
+
