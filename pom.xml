@@ -6,7 +6,7 @@
 
     <groupId>net.gneisscode</groupId>
     <artifactId>nbttocsv</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
     <name>NBT_to_CSV</name>
 
     <properties>
